@@ -5,7 +5,7 @@
 </head>
 <body>
 
-Редактировать пользователя с номером ${param.id}
+Редактировать пользователя ${param.name}
 
 <form action="/CRUD_war/updateUser" method="post">
     <input type="hidden" name = "id" value="${param.id}">

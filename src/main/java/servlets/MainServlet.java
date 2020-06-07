@@ -16,7 +16,7 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserService userService = new UserService();
+        UserService userService = UserService.getInstance();
         List<User> users = userService.getAllUsers();
         resp.setContentType("text/html");
         req.setAttribute("users", users);

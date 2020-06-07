@@ -15,7 +15,7 @@ public class DeletionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         long id = Long.parseLong(req.getParameter("id"));
-        UserService userService = new UserService();
+        UserService userService = UserService.getInstance();
         try {
             userService.deleteUserById(id);
         } catch (SQLException throwables) {

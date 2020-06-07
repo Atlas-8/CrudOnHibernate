@@ -14,7 +14,7 @@ public class AdditionServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserService userService = new UserService();
+        UserService userService = UserService.getInstance();
         String name = req.getParameter("name");
         long age  = 0;
         try {

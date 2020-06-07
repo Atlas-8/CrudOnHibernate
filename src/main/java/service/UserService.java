@@ -1,14 +1,38 @@
 package service;
 
 import DAO.UserDAO;
+import DAO.UserHibernateDAO;
+import DAO.UserJdbcDAO;
 import model.User;
+import org.hibernate.SessionFactory;
+import util.DBHelper;
+
 import javax.servlet.ServletException;
 import java.sql.*;
 import java.util.List;
 
 public class UserService {
 
-    public UserService() {
+    private static UserService userService;
+    private SessionFactory sessionFactory;
+
+    private UserService(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+//    private static UserDAO getUserDAO() {
+//        return new UserJdbcDAO(getMysqlConnection());
+//    }
+
+    private static UserDAO getUserDAO() {
+        return new UserHibernateDAO(DBHelper.getSessionFactory().openSession());
+    }
+
+    public static UserService getInstance() {
+        if (userService == null) {
+            userService = new UserService(DBHelper.getSessionFactory());
+        }
+        return userService;
     }
 
     public User getUserById(long id) throws Exception {
@@ -90,9 +114,5 @@ public class UserService {
             e.printStackTrace();
             throw new IllegalStateException();
         }
-    }
-
-    private static UserDAO getUserDAO() {
-        return new UserDAO(getMysqlConnection());
     }
 }

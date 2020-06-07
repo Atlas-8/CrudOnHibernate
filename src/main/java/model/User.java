@@ -1,10 +1,21 @@
 package model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "age")
     private Long age;
 
     public User() {
@@ -44,20 +55,6 @@ public class User {
 
     public void setAge(Long age) {
         this.age = age;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User that = (User) o;
-        return Objects.equals(getName(), that.getName()) &&
-                Objects.equals(getAge(), that.getAge());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName(), getAge());
     }
 
 }
